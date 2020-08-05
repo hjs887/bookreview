@@ -50,7 +50,16 @@
                     data: {},
                     success: function (response) {
                         if (response["result"] == "success") {
-                            alert(response["msg"]);
+                            var reviews = response['reviews'];
+                            for (let i = 0; i < reviews.length; i++) {
+                                var review = reviews[i];
+                                var tempHtml = `<tr>
+                                    <td>${review['title']}</td>
+                                    <td>${review['author']}</td>
+                                    <td>${review['review']}</td>
+                                </tr>`;
+                                $('#review-box').append(tempHtml);
+                            }
                         } else {
                             alert("리뷰를 받아오지 못했습니다");
                         }
