@@ -34,7 +34,14 @@ def write_review():
 
 @app.route('/review', methods=['GET'])
 def read_reviews():
-    return jsonify({'result': 'success', 'msg': '이 요청은 GET!'})
+    condition = {}
+    # 파이몽고가 주는 리스트를 제이선으로 사용할 수 있는 파이썬 리스트로 변경
+    reviews = list(db.review.find(condition, {'_id': 0}))
+    result = {
+        'result': 'success',
+        'reviews': reviews
+    }
+    return jsonify(result)
 
 
 if __name__ == '__main__':
